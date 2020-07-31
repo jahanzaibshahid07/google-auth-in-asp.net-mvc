@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Employee Data</title>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var ulemployee = $('#ulEmployee');
+
+            $('#list').click(function () {
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/employee',
+                    dataType: 'json',
+                    success: function (data) {
+
+                        ulemployee.empty();
+
+                        debugger
+
+                        $.each(data, function (index, val) {
+
+                            var Fullname = val.Firstname + ' ' + val.Lastname;
+                            debugger
+                            ulemployee.append('<li>' + Fullname + '</li>');
+                        });
+                    }
+
+                });
+
+            });
+
+            $('#clear').click(function () {
+                ulemployee.empty();
+            });
+
+        });
+
+
+
+    </script>
+</head>
+
+<body>
+
+    <input type="button" id="list" value="Get all employee" />
+
+    <input type="button" id="clear" value="Clear" />
+
+    <ul id="ulEmployee"></ul>
+
+</body>
+</html>
